@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-dev
+data:
+  ENV: "dev"
+  DB_HOST: "db-h"
+  POSTGRES_DB: "postgres"
+  DB_AUTH_SOURCE: "admin"
+  DJANGO_SETTINGS_MODULE: "project.settings"

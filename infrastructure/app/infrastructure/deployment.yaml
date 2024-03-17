@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+spec:
+  selector:
+    matchLabels:
+      app: app
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      restartPolicy: Always
+      volumes:
+        - name: app-volume
+          persistentVolumeClaim:
+            claimName: app-pvc
+      containers:
+        - name: app
+          image: bcdscrypto/realestate-app:alpine
+          imagePullPolicy: Always
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+          - containerPort: 8000
+          volumeMounts:
+            - mountPath: /app/project/media
+              name: app-volume
+          envFrom:
+            - configMapRef:
+                name: app-dev
+            - secretRef:
+                name: app-secret
+            - secretRef:
+                name: db-secret
+          # env:
+          #   - name: DB_HOST
+          #     value: db-h
+          #   - name: DB_USERNAME
+          #     value: root
+          #   - name: DB_PASSWORD
+          #     value: pass
+          #   - name: DB_AUTH_SOURCE
+          #     value: admin
+          #   - name: DJANGO_SETTINGS_MODULE
+          #     value: project.settings
