@@ -1,18 +1,34 @@
-from django import forms
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.forms import ModelForm
 
-from .models import Venture
+from .models import Venture, Building
+
+class BuildingCreationForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(BuildingCreationForm, self).__init__(*args, **kwargs)
+        self.fields['name'].label = 'Nome'
+        self.fields['street_name'].label = 'Rua'
+        self.fields['street_number'].label = 'Número'
+        self.fields['neighborhood'].label = 'Bairro'
+        self.fields['city'].label = 'Cidade'
+        self.fields['state'].label = 'Estado'
+
+    class Meta:
+        model = Building
+        fields = ['name', 'street_name', 'street_number', 'neighborhood', 'city', 'state']
 
 
-class VentureRegisterForm(UserCreationForm):
-    # first_name = forms.CharField(max_length=50)
-    # last_name = forms.CharField(max_length=50)
-    # email = forms.EmailField()
+class VentureCreationForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(VentureCreationForm, self).__init__(*args, **kwargs)
+        self.fields['building'].label = 'Empreendimento'
+        self.fields['complement'].label = 'Complemento'
+        self.fields['price'].label = 'Preço'
+        self.fields['customer'].label = 'Cliente'
 
     class Meta:
         model = Venture
         fields = ['building', 'complement', 'price', 'customer']
+
 
 # class UserUpdateForm(forms.ModelForm):
 #     first_name = forms.CharField(max_length=50)
@@ -30,15 +46,3 @@ class VentureRegisterForm(UserCreationForm):
 #         fields = ['username', 'email', 'first_name', 'last_name']
 
 
-
-# class VentureCreationForm(UserCreationForm):
-#     def __init__(self, *args, **kwargs):
-#         super(VentureCreationForm, self).__init__(*args, **kwargs)
-#         self.fields['building'].label = 'Empreendimento'
-#         self.fields['complement'].label = 'Complemento'
-#         self.fields['price'].label = 'Preço'
-#         self.fields['customer'].label = 'Cliente'
-
-#     class Meta:
-#         model = Venture
-#         fields = ['building', 'complement', 'price', 'customer']

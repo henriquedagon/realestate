@@ -3,8 +3,11 @@
     <table class="table" >
     <!-- <thead><tr><th colspan="2" class="text-center" scope="col">Dados pessoais</th></tr></thead> -->
     <tbody>
-      <tr><td>Nome</td><td class="text-right">{{ object.name|title }}</td></tr>
+      <tr><td>Nome</td><td class="text-right">{{ object.full_name|title }}</td></tr>
       <tr><td>CPF</td><td class="text-right">{{ object.tax_id}}</td></tr>
+      <!-- {% if object.formatted_phone_number %} -->
+      <tr><td>Telefone</td><td class="text-right">{{ object.formatted_phone_number}}</td></tr>
+      <!-- {% endif %} -->
     </tbody>
   </table>
 </div>

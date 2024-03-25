@@ -1,0 +1,35 @@
+{% extends "venture/base.html" %}
+
+{% block main %}
+<main role="main" class="container">
+    <div class="content-section col-md-6">
+      <h4>Empreendimento</h4>
+      <table class="table" >
+        <tbody>
+          <tr><td>Nome</td><td class="text-right">{{ object.name|title }}</td></tr>
+          <tr><td>Rua</td><td class="text-right">{{ object.street_name|title }}</td></tr>
+          <tr><td>Número</td><td class="text-right">{{ object.street_number|title }}</td></tr>
+          <tr><td>Bairro</td><td class="text-right">{{ object.neighborhood|title }}</td></tr>
+          <tr><td>Cidade</td><td class="text-right">{{ object.city|title }}</td></tr>
+          <tr><td>Estado</td><td class="text-right">{{ object.state|upper }}</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-6">
+      <div class="content-section">
+        <h3 class="d-flex justify-content-between align-items-center">Clientes no empreendimento</h3>
+        <ul class="list-group">
+          {% for customers_count in customers_count %}
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" id="list-profile-list" data-toggle="list" href="{% url 'customer-detail' customers_count.customer.id %}">{{ customers_count.customer.full_name }}<span class="badge badge-primary badge-pill">{{ customers_count.total }}</span></a>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+</main>
+
+
+
+
+
+
+{% endblock main %}

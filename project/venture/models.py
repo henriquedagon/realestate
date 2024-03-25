@@ -3,20 +3,33 @@ from django.db import models
 from portal.models import Customer
 from django.urls import reverse
 
+from portal.utils.states import STATE_CODES
+
 
 class Building(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=128)
-    address = models.CharField(max_length=256)
+    street_name = models.CharField(max_length=256, null=True)
+    street_number = models.IntegerField(null=True)
+    neighborhood = models.CharField(max_length=64, null=True)
+    city = models.CharField(max_length=64, null=True)
+    state = models.CharField(max_length=2, choices=STATE_CODES, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    @property
+    def address(self):
+        "Returns the person's full name."
+        return f"{self.street_name} {self.street_number}"
 
     def __repr__(self):
         return self.name
 
-
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('building-detail', kwargs={'pk': self.pk})
 
 
 class Venture(models.Model):

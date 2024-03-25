@@ -10,6 +10,7 @@ from .views import (
 )
 
 urlpatterns = [
+    # path('media/favicon.jpg', name='favicon')
     path('', views.home, name='portal-home'),
     # path('', CustomerListView.as_view(), name='portal-home'),
     # path('user/<str:username>', UserCustomerListView.as_view(), name='user-customers'),

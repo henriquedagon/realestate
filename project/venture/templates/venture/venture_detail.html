@@ -6,10 +6,10 @@
       <h4>Investimento</h4>
       <table class="table" >
       <tbody>
-        <tr><td>Endereço</td><td class="text-right">{{ object.building.address|title }}</td></tr>
-        <tr><td>Complemento</td><td class="text-right">{{ object.complement|title }}</td></tr>
-        <tr><td>Preço</td><td class="text-right">R$ {{ object.price }}</td></tr>
+        <tr><td>Empreendimento</td><td class="text-right"><a href="{% url 'building-detail' object.building.id %}">{{ object.building|title }}</a></td></tr>
         <tr><td>Cliente</td><td class="text-right"><a href="{% url 'customer-detail' object.customer.id %}">{{ object.customer }}</a></td></tr>
+        <tr><td>Número</td><td class="text-right">{{ object.complement|title }}</td></tr>
+        <tr><td>Valor</td><td class="text-right">R$ {{ object.price }}</td></tr>
       </tbody>
     </table>
   </div>

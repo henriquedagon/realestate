@@ -11,7 +11,7 @@ from django.views.generic import (
     UpdateView,
     DeleteView,
 )
-# from project import venture
+from portal.form import CustomerRegisterForm
 
 from venture.models import Building, Venture
 
@@ -51,7 +51,12 @@ def get_context_data(self, **kwargs):
 
 class CustomerCreateView(LoginRequiredMixin, CreateView):
     model = Customer
-    fields = ['name', 'tax_id']
+    # fields = ['first_name', 'last_name', 'tax_id']
+    form_class = CustomerRegisterForm
+    labels = {
+        'first_name': 'Nome',
+    }  
+
 
     def form_valid(self, form):
         form.instance.entrepreneur = self.request.user
